@@ -46,6 +46,10 @@ pub fn main() -> Result<(), Error> {
                 return Err(Error::UnitTypeNotMatch);
             }
         } else {
+            if load_cell_type_hash(dex_index, Source::Output)?.is_some() {
+                return Err(Error::DexCKBTypeNotMatch);
+            }
+
             let dex_input_capacity = load_cell_capacity(dex_index, Source::Input)? as u128;
             let output_capacity = load_cell_capacity(dex_index, Source::Output)? as u128;
 
